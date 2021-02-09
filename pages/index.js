@@ -1,7 +1,17 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export async function getServerSideProps(ctx){
+  const res = await fetch(`http://localhost:3000/api/hello`)
+  const data = await res.json()
+  return {
+    props:{
+      test:data
+    }
+  }
+}
+
+export default function Home({test}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -11,9 +21,8 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to {test.firstname} {test.name} !
         </h1>
-
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
