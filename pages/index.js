@@ -1,74 +1,21 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+//import styles from '../styles/Home.module.css'
+import Card from './components/3dcard'
+import {useEffect} from 'react'
+import gsap from 'gsap/dist/gsap'
 
-export async function getServerSideProps(ctx){
-  const res = await fetch(`http://localhost:3000/api/hello`)
-  const data = await res.json()
-  return {
-    props:{
-      test:data
-    }
-  }
-}
+export default function Home() {
 
-export default function Home({test}) {
+    useEffect(()=>{
+        gsap.fromTo('#title',{x:'-150%'}, {x:0, duration:1, ease:'elastic.out', delay:1})
+    },[])
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to {test.firstname} {test.name} !
-        </h1>
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+    <div>
+      <header>
+          <h1 id={"title"}>Présentation de nos nouvelles cartes</h1>
+      </header>
+      <Card cardId={"test"} cardName={"Lord Jaraxxus"}></Card>
+      <Card cardId={"test1"} cardName={"Drol Succaraj"}></Card>
     </div>
   )
 }
